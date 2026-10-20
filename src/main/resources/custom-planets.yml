@@ -1,0 +1,29 @@
+# NexusStargate: your own planets. This file is never overwritten; run /stargate reload after editing.
+#
+# Change a built-in planet field by field, add your own, or hide planets, without touching planets.yml (which is
+# replaced when the plugin updates). Planet ids are lower case letters, digits, - and _ (up to 24). Each planet is a
+# world named sg_<id>. A new planet gets its world and its gate the first time the server starts or reloads with it.
+#
+# Fields of a planet:
+#   name         what players see
+#   designation  a few words under the name when someone arrives
+#   style        desert | forest | moor | ice | jungle | ash
+#   seed         any whole number; a different seed gives a different land of the same style
+#   starter      true: everyone can dial it from the start. false: it has to be learned.
+#   time         time of day it is stuck at, 0 to 24000 (6000 noon, 18000 midnight). Default depends on the style.
+#   mobs         false: nothing spawns on it
+#   blurb        one line of description
+#
+# Example: a second desert world with another seed, open to everyone.
+#
+# planets:
+#   tatooine-ish:
+#     name: "Dune Sea"
+#     designation: "Desert world"
+#     style: desert
+#     seed: 5150
+#     starter: true
+#
+# Example: stop offering a built-in planet (its gate is removed; the world stays on disk).
+#
+# hidden-planets: [netu]

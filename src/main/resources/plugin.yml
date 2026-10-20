@@ -1,0 +1,25 @@
+name: NexusStargate
+version: ${project.version}
+main: com.nexuscraft.nexusstargate.StargatePlugin
+api-version: '1.21'
+author: Nexus Universe
+description: Working stargates. Build a gate, place a dialing device, dial other gates or travel to generated worlds styled after places in the show.
+
+commands:
+  stargate:
+    description: Dial, inspect and control the gate beside you.
+    aliases: [sg, gate]
+    permission: nexusstargate.use
+    permission-message: You cannot use stargates here.
+    usage: /stargate [dial|list|info|close|iris|rename|tablet|blueprint]
+
+permissions:
+  nexusstargate.use:
+    description: Use dialing devices and the /stargate command.
+    default: true
+  nexusstargate.build:
+    description: Place dialing devices and register gates.
+    default: true
+  nexusstargate.admin:
+    description: Hand out items, teach addresses, remove gates, visit and rebuild planets, reload.
+    default: op

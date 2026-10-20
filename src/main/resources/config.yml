@@ -1,0 +1,105 @@
+# NexusStargate 0.1.0
+#
+# Build a gate (a ring of 20 blocks with nine chevron blocks, see /stargate blueprint), put a dialing device within
+# reach of it, right-click the device and pick where to go. Gates you build take you to other gates; the planets
+# (planets.yml, plus your own in custom-planets.yml) are whole worlds made for the purpose, each with a gate waiting.
+# /stargate reload applies changes to this file.
+
+dial:
+  # Server ticks between one chevron locking and the next (seven lock). 14 ticks is about a second.
+  chevron-ticks: 14
+  # Seconds a gate must rest after a wormhole closes (or a dial fails) before it can dial again.
+  cooldown-seconds: 8
+  # How close (blocks) a dialing device or a player must be to its gate.
+  range: 10
+  # true: a player can only dial gates they own, were taught (tablet, /stargate learn, the API) or that are open to
+  # everyone (starter planets). Typing a full six-glyph address always works. false: every gate is open to everyone.
+  require-known-address: true
+
+wormhole:
+  # A wormhole shuts after this long no matter what, and after idle-seconds with nobody going through.
+  max-seconds: 300
+  idle-seconds: 90
+  # How far in front of the far gate travellers appear (blocks).
+  arrival-distance: 1.6
+  # "all": players, animals, monsters and dropped items go through. "players": players only.
+  traffic: all
+
+kawoosh:
+  # When a wormhole opens, anyone standing right in front of either gate is thrown back and hurt.
+  enabled: true
+  damage: 8.0
+  knockback: 1.2
+  # Players this close (blocks) are told to stand clear when the sixth chevron locks.
+  warn-radius: 8
+
+gates:
+  # How many gates one player may register. Staff are not limited.
+  max-per-player: 3
+
+planets:
+  # Blocks from the middle that each gate world extends (the world border).
+  border-radius: 1500
+  # true: generate the land around every planet's gate when the server starts (slower start, no stutter on arrival).
+  preload: false
+
+# The blocks gates are made of. Ring, chevron and lit chevron must be three different blocks.
+gate:
+  ring: POLISHED_BLACKSTONE_BRICKS
+  chevron: RED_NETHER_BRICKS
+  chevron-lit: SHROOMLIGHT
+  # What fills an open gate. Leave it as NETHER_PORTAL; other blocks will be solid.
+  horizon: NETHER_PORTAL
+  # What fills the opening while the iris is closed.
+  iris: IRON_BLOCK
+  # The dialing device.
+  dhd: CRYING_OBSIDIAN
+
+dhd:
+  name: "&6Dialing Device"
+  recipe:
+    enabled: true
+    # Up to three rows of up to three letters, and what each letter is.
+    shape: ["AEA", "OCO", "OOO"]
+    ingredients:
+      A: AMETHYST_SHARD
+      E: ENDER_EYE
+      O: OBSIDIAN
+      C: CRYING_OBSIDIAN
+
+# Everything the plugin says. {placeholders} are filled in; &-codes are colours. Delete a line to use the built-in text.
+messages:
+  dhd-placed: "&6Dialing device linked to &e{name}&6. This gate's address is &f{address}&6."
+  dhd-no-gate: "&cNo complete gate within {range} blocks. &7/stargate blueprint shows how to build one."
+  dhd-blocked: "&cThe gate nearby has something in its opening. Clear it first."
+  gate-limit: "&cYou already own {n} gates."
+  gate-broken: "&cThis gate is damaged and no longer works."
+  gate-removed: "&7The gate {name} has fallen silent for good."
+  dial-busy: "&cThis gate is already in use."
+  dial-far-busy: "&cChevron 7 will not lock. The far gate is busy."
+  dial-unknown: "&cChevron 7 will not lock. Nothing answers at that address."
+  dial-not-known: "&cYou do not know that address."
+  dial-self: "&cA gate cannot dial itself."
+  dial-cooldown: "&cThe gate is still recharging ({n}s)."
+  dial-failed: "&cThe far gate could not be reached."
+  dial-start: "&7Dialing {address}…"
+  wormhole-open: "&bThe wormhole is open to &f{name}&b."
+  wormhole-incoming: "&bIncoming wormhole"
+  wormhole-incoming-sub: "&7Stand clear of the gate"
+  wormhole-closed: "&7The wormhole closes."
+  wormhole-timeout: "&7The wormhole has run out of power."
+  wormhole-idle: "&7Nobody came through. The wormhole closes."
+  stand-clear: "&cStand clear!"
+  iris-closed: "&cThe iris is closed. You cannot get through."
+  one-way: "&7This end of the wormhole only takes arrivals."
+  iris-on: "&7The iris closes."
+  iris-off: "&7The iris opens."
+  learned: "&6New address learned: &e{name} &7({address})"
+  tablet-learned: "&6You study the tablet and learn the address of &e{name}&6."
+  tablet-known: "&7You already know that address."
+  tablet-given: "&6You copy the address of &e{name}&6 onto a tablet."
+  not-owner: "&cOnly the owner of this gate can do that."
+  no-permission: "&cYou cannot do that."
+  renamed: "&6This gate is now called &e{name}&6."
+  name-taken: "&cAnother gate already has that name."
+  bad-name: "&cA gate name is 1 to 32 characters."
